@@ -1,11 +1,25 @@
-import { Route, Routes } from "react-router-dom";
+/* eslint-disable react-refresh/only-export-components */
+import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import { routesList } from "./routes";
-import Main from "./pages/Main/Main";
 import Layout from "./pages/Layout";
 import Login from "./pages/Login/Login";
+import { observer } from "mobx-react-lite";
+import { useContext, useEffect } from "react";
+import { Context } from "./main";
+import Loader from "./components/shared/ui/Loader/Loader";
 
 function App() {
+  const { store } = useContext(Context);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("isAuth")) {
+      store.checkAuth(navigate);
+    }
+  }, []);
+  if (store.isLoading) {
+    return <Loader />;
+  }
   return (
     <>
       <Routes>
@@ -20,4 +34,4 @@ function App() {
   );
 }
 
-export default App;
+export default observer(App);

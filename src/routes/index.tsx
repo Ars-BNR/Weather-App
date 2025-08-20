@@ -5,7 +5,7 @@ import Weather from "../pages/Weather/Weather";
 import Profile from "../pages/Profile/Profile";
 
 export const routesList: RouteObject[] = [
-  { path: "/", element: <Main /> },
+  { path: "/main", element: <Main /> },
   { path: "/login", element: <Login /> },
   { path: "/weather", element: <Weather /> },
   { path: "/profile", element: <Profile /> },
